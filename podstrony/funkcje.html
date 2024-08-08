@@ -1,1 +1,41 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>misia>_< - matma</title>
+</head>
+<body>
+    <div id="glowna"><a href="../index.html"><p>Główna</p></a></div>
+    <div id="nag"><p>Funkcje</p></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nagP = document.querySelector('#nag p');
+        
+            nagP.addEventListener('click', function() {
+                nagP.classList.add('shake');
+                
+                // Remove the shake class after the animation completes
+                setTimeout(() => {
+                    nagP.classList.remove('shake');
+                }, 700); // Duration of the shake animation in milliseconds
+            });
+        });
+        </script>
+        
+    
+    
+    <div id="spis">
+        <h1>Spis treści</h1>
+        <hr style="height:1px;width:30%;border-width:0;background-color:#d58195">
+        <ul>
+            <li><p onClick="document.getElementById('liniowa').scrollIntoView();">Funkcja liniowa</p></li>
+            <li><p onClick="document.getElementById('kwadratowa').scrollIntoView();">Funkcja kwadratowa</p></li>
+            <li><p onClick="document.getElementById('wymierna').scrollIntoView();">Funkcje wymierne</p></li>
+        </ul>
+    </div>
+    <div id="content">
+    </div>
+</body>
+</html>
