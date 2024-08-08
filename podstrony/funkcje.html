@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>misia>_< - matma</title>
+    <title>misia>_< - funkcje!!!</title>
 </head>
 <body>
-    <div id="glowna"><a href="../index.html"><p>Główna</p></a></div>
+    <div id="glowna"><a href="../index.html"><p>Główna /</p></a></div>
+    <img id="top" onclick="topFunction()" style="position:fixed;" src="top.png" alt="">
+    <script>
+        // When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+    </script>
     <div id="nag"><p>Funkcje</p></div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -22,6 +30,47 @@
                 }, 700); // Duration of the shake animation in milliseconds
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const liP = document.querySelector('#raz');
+        
+            liP.addEventListener('mouseover', function() {
+                liP.classList.add('shake');
+                
+                // Remove the shake class after the animation completes
+                setTimeout(() => {
+                    liP.classList.remove('shake');
+                }, 700); // Duration of the shake animation in milliseconds
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const liP = document.querySelector('#dwa');
+        
+            liP.addEventListener('mouseover', function() {
+                liP.classList.add('shake');
+                
+                // Remove the shake class after the animation completes
+                setTimeout(() => {
+                    liP.classList.remove('shake');
+                }, 700); // Duration of the shake animation in milliseconds
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const liP = document.querySelector('#trzy');
+        
+            liP.addEventListener('mouseover', function() {
+                liP.classList.add('shake');
+                
+                // Remove the shake class after the animation completes
+                setTimeout(() => {
+                    liP.classList.remove('shake');
+                }, 700); // Duration of the shake animation in milliseconds
+            });
+        });
+
+        
         </script>
         
     
@@ -30,12 +79,23 @@
         <h1>Spis treści</h1>
         <hr style="height:1px;width:30%;border-width:0;background-color:#d58195">
         <ul>
-            <li><p onClick="document.getElementById('liniowa').scrollIntoView();">Funkcja liniowa</p></li>
-            <li><p onClick="document.getElementById('kwadratowa').scrollIntoView();">Funkcja kwadratowa</p></li>
-            <li><p onClick="document.getElementById('wymierna').scrollIntoView();">Funkcje wymierne</p></li>
+            <li id="raz"><p onClick="document.getElementById('liniowa').scrollIntoView();">Funkcja liniowa</p></li>
+            <li id="dwa"><p onClick="document.getElementById('kwadratowa').scrollIntoView();">Funkcja kwadratowa</p></li>
+            <li id="trzy"><p onClick="document.getElementById('wymierna').scrollIntoView();">Funkcje wymierne</p></li>
         </ul>
     </div>
+
+    <h2 id="liniowa">Funkcja Liniowa</h2>
+
+    
+    <div id="cytat">
+        <p id="cytatParagraf">“Siadaj chromosomie. Czas na lekcję. Kojarzysz to kurwa? Oczywiście, że nie. To jest postać kierunkowa funkcji liniowej. Dzbanie.”</p>
+        <p id="cytatAutor">~Dopaminowy wąż</p>
+    </div>
+
     <div id="content">
+        <div id="funkcjaLiniowa"><p>eloelo</p></div>
+    
     </div>
 </body>
 </html>

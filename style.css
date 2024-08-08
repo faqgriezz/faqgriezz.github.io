@@ -107,7 +107,7 @@ li{
 .sub{
     display:flex;
     flex-direction:row;
-    background-color: black;
+    background-image:url("black.png");
     margin:auto;
     border: #d58195, 1px, solid;
     border-radius:4px;
@@ -117,7 +117,7 @@ li{
     height:100px;
     font-size:30px;
     font-weight:bold;
-    transition-duration: 0.1s;
+    transition-duration: 0.5s;
 }
 
 a{
@@ -126,13 +126,20 @@ a{
     transition-duration: 0.1s;
 }
 
+a p{
+    font-size:50px;
+}
+
 .sub:hover{
     border-color:white;
-    transition-duration: 0.1s;
+    background-color:none;
+    background-image: url("hellokitty.png");
+    transition-duration: 0.5s;
 }
 
 a:hover{
     color:white;
+    text-shadow: 0px 4px 2px rgb(167, 101, 116);
     transition-duration: 0.1s;
 }
 
