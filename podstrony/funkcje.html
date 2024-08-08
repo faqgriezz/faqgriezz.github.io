@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src= 
+"https://cdn.plot.ly/plotly-latest.min.js"> 
+</script> 
+<script src= 
+"https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.5.0/math.js"> 
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
@@ -94,8 +100,69 @@ function topFunction() {
     </div>
 
     <div id="content">
-        <div id="funkcjaLiniowa"><p>eloelo</p></div>
+        <div id="funkcjaLiniowa"><p><b>Funkcja</b> to takie matematyczne narzędzie, które na podstawie zmieniającej się zmiennej (oznaczaną przeważnie jako <b>x</b>) pozwala nam policzyć wartość (przeważnie - <b>y</b>)
+         poprzez podstawienie jej do wzoru ów funkcji.<br><br>
+        Przykładowym wzorem funkcji jest <b>f(x) = x + 5</b>, co równie dobrze można zapisać jako: <b>y = x + 5</b>.</p></div>
     
     </div>
+
+    <div id="generator">
+
+    <div class="input-container"> 
+        <input type="text" id="functionInput" 
+            placeholder="Podaj wzór funkcji (np. y = x + 2)"> 
+        <button onclick="plotGraph()"> 
+            Rysuj 
+        </button> 
+    </div> 
+    <div class="main-content"> 
+        <div class="graph" id="graph"></div> 
+    </div> 
+
+    </div>
+
+    <script> 
+        function plotGraph() { 
+            const graph = document.getElementById('graph'); 
+            graph.innerHTML = ''; 
+  
+            const functionInput = 
+                document.getElementById('functionInput').value; 
+            const expr = math.parse(functionInput).compile(); 
+  
+            const xValues = math.range(-10, 10, 0.1)._data; 
+            const yValues = xValues.map(x => expr.evaluate({ x })); 
+  
+            const trace = {
+                x: xValues,
+                y: yValues,
+                mode: 'lines',
+                type: 'scatter',
+                line: { color: 'white', width: 2.5 }
+            };
+
+            const layout = {
+                title: {
+                    text: 'Wykres funkcji',
+                    font: {
+                        color: '#D58194'
+                    }
+                },
+                xaxis: { title: 'x', showgrid: true, zeroline: true, color: '#D58194' },
+                yaxis: { title: 'y', showgrid: true, zeroline: true, color: '#D58194' },
+                plot_bgcolor: 'rgb(14, 14, 14)',
+                paper_bgcolor: 'black'
+            };
+  
+            Plotly.newPlot(graph, [trace], layout); 
+        } 
+    </script> 
+    <div id="content">
+        <div id="funkcjaLiniowa"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eleifend porta volutpat. Phasellus ullamcorper magna ligula, sed congue erat pulvinar vitae. Maecenas suscipit tortor ut massa ultrices, condimentum egestas est efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris ut erat a nisi pharetra suscipit sed id massa. Aenean rhoncus vulputate eros ac commodo. Etiam id est odio. Morbi placerat accumsan velit, eget pretium nulla. Suspendisse tempus egestas nibh eu dignissim.
+
+            Quisque nec nisl non eros interdum consectetur sed vitae nibh. Sed quis gravida turpis, nec scelerisque neque. Curabitur vel nibh consectetur, sollicitudin nunc vel, mollis elit. Nulla facilisi. Ut id dui ligula. Praesent quam neque, pharetra at imperdiet vel, ornare et eros. Vivamus eleifend nibh ac egestas rhoncus. Etiam accumsan nunc arcu, sed venenatis ante commodo eget. Sed nulla lectus, rhoncus sed dignissim et, suscipit a massa. Suspendisse a imperdiet arcu, nec malesuada elit. Vestibulum pellentesque finibus tempus. Nullam pulvinar eros odio, quis porttitor orci egestas non. Ut in augue quam. Nam ornare massa eu sem dictum mattis non sed ante. In vel vestibulum est.</p></div>
+        
+    </div>
+    
 </body>
 </html>
