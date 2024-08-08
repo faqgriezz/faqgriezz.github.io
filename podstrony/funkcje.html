@@ -38,6 +38,19 @@ function topFunction() {
         });
 
         document.addEventListener('DOMContentLoaded', function() {
+            const liP = document.querySelector('#zero');
+        
+            liP.addEventListener('mouseover', function() {
+                liP.classList.add('shake');
+                
+                // Remove the shake class after the animation completes
+                setTimeout(() => {
+                    liP.classList.remove('shake');
+                }, 700); // Duration of the shake animation in milliseconds
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
             const liP = document.querySelector('#raz');
         
             liP.addEventListener('mouseover', function() {
@@ -85,22 +98,28 @@ function topFunction() {
         <h1>Spis treści</h1>
         <hr style="height:1px;width:30%;border-width:0;background-color:#d58195">
         <ul>
+            <li id="zero"><p onClick="document.getElementById('wprowadzenie').scrollIntoView();">Wprowadzenie do funkcji</p></li>
             <li id="raz"><p onClick="document.getElementById('liniowa').scrollIntoView();">Funkcja liniowa</p></li>
             <li id="dwa"><p onClick="document.getElementById('kwadratowa').scrollIntoView();">Funkcja kwadratowa</p></li>
             <li id="trzy"><p onClick="document.getElementById('wymierna').scrollIntoView();">Funkcje wymierne</p></li>
         </ul>
     </div>
 
-    <h2 id="liniowa">Funkcja Liniowa</h2>
+    <h2 id="wprowadzenie">Wprowadzenie do funkcji</h2>
 
     
-    <div id="cytat">
+    <!-- <div id="cytat">
         <p id="cytatParagraf">“Siadaj chromosomie. Czas na lekcję. Kojarzysz to kurwa? Oczywiście, że nie. To jest postać kierunkowa funkcji liniowej. Dzbanie.”</p>
+        <p id="cytatAutor">~Dopaminowy wąż</p>
+    </div> -->
+
+    <div id="cytat">
+        <p id="cytatParagraf">“Dzisiaj się dowiesz czym jest funkcja. Zjebié.”</p>
         <p id="cytatAutor">~Dopaminowy wąż</p>
     </div>
 
     <div id="content">
-        <div id="funkcjaLiniowa"><p><b>Funkcja</b> to takie matematyczne narzędzie, które na podstawie zmieniającej się zmiennej (oznaczaną przeważnie jako <b>x</b>) pozwala nam policzyć wartość (przeważnie - <b>y</b>)
+        <div id="tekst"><p><b>Funkcja</b> to takie matematyczne narzędzie, które na podstawie zmieniającej się zmiennej (oznaczanej przeważnie jako <b>x</b>) pozwala nam policzyć wartość (przeważnie - <b>y</b>)
          poprzez podstawienie jej do wzoru ów funkcji.<br><br>
         Przykładowym wzorem funkcji jest <b>f(x) = x + 5</b>, co równie dobrze można zapisać jako: <b>y = x + 5</b>.</p></div>
     
@@ -108,31 +127,38 @@ function topFunction() {
 
     <div id="generator">
 
-    <div class="input-container"> 
-        <input type="text" id="functionInput" 
-            placeholder="Podaj wzór funkcji (np. y = x + 2)"> 
-        <button onclick="plotGraph()"> 
-            Rysuj 
-        </button> 
-    </div> 
-    <div class="main-content"> 
-        <div class="graph" id="graph"></div> 
-    </div> 
+        <form id="functionForm">
+            <input type="text" id="functionInput" placeholder="Podaj wzór funkcji (np. x+2)">
+            <button type="submit">Rysuj</button>
+        </form>
+        <h5 style="color:rgb(63, 63, 63);text-align:center;">Użyj "Math.abs()" do wartości bezwzględnych</h5>
+        <div id="graph-container">
+            <div id="graph"></div>
+        </div>
 
     </div>
 
     <script> 
-        function plotGraph() { 
-            const graph = document.getElementById('graph'); 
-            graph.innerHTML = ''; 
-  
-            const functionInput = 
-                document.getElementById('functionInput').value; 
-            const expr = math.parse(functionInput).compile(); 
-  
-            const xValues = math.range(-10, 10, 0.1)._data; 
-            const yValues = xValues.map(x => expr.evaluate({ x })); 
-  
+        document.getElementById('functionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const input = document.getElementById('functionInput').value;
+            const parsedFunction = input.replace('y=', '');
+            
+            const xValues = [];
+            const yValues = [];
+            
+            for (let x = -10; x <= 10; x += 0.1) {
+                try {
+                    const y = eval(parsedFunction);
+                    xValues.push(x);
+                    yValues.push(y);
+                } catch (error) {
+                    alert('Invalid function. Please enter a valid mathematical function.');
+                    return;
+                }
+            }
+
             const trace = {
                 x: xValues,
                 y: yValues,
@@ -143,7 +169,7 @@ function topFunction() {
 
             const layout = {
                 title: {
-                    text: 'Wykres funkcji',
+                    text: '<b>Wykres funkcji</b>',
                     font: {
                         color: '#D58194'
                     }
@@ -153,12 +179,14 @@ function topFunction() {
                 plot_bgcolor: 'rgb(14, 14, 14)',
                 paper_bgcolor: 'black'
             };
-  
-            Plotly.newPlot(graph, [trace], layout); 
-        } 
+
+            const data = [trace];
+
+            Plotly.newPlot('graph', data, layout);
+        });
     </script> 
     <div id="content">
-        <div id="funkcjaLiniowa"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eleifend porta volutpat. Phasellus ullamcorper magna ligula, sed congue erat pulvinar vitae. Maecenas suscipit tortor ut massa ultrices, condimentum egestas est efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris ut erat a nisi pharetra suscipit sed id massa. Aenean rhoncus vulputate eros ac commodo. Etiam id est odio. Morbi placerat accumsan velit, eget pretium nulla. Suspendisse tempus egestas nibh eu dignissim.
+        <div id="tekst"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eleifend porta volutpat. Phasellus ullamcorper magna ligula, sed congue erat pulvinar vitae. Maecenas suscipit tortor ut massa ultrices, condimentum egestas est efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris ut erat a nisi pharetra suscipit sed id massa. Aenean rhoncus vulputate eros ac commodo. Etiam id est odio. Morbi placerat accumsan velit, eget pretium nulla. Suspendisse tempus egestas nibh eu dignissim.
 
             Quisque nec nisl non eros interdum consectetur sed vitae nibh. Sed quis gravida turpis, nec scelerisque neque. Curabitur vel nibh consectetur, sollicitudin nunc vel, mollis elit. Nulla facilisi. Ut id dui ligula. Praesent quam neque, pharetra at imperdiet vel, ornare et eros. Vivamus eleifend nibh ac egestas rhoncus. Etiam accumsan nunc arcu, sed venenatis ante commodo eget. Sed nulla lectus, rhoncus sed dignissim et, suscipit a massa. Suspendisse a imperdiet arcu, nec malesuada elit. Vestibulum pellentesque finibus tempus. Nullam pulvinar eros odio, quis porttitor orci egestas non. Ut in augue quam. Nam ornare massa eu sem dictum mattis non sed ante. In vel vestibulum est.</p></div>
         
