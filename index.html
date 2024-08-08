@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>misia>_< - matma</title>
+</head>
+<body>
+    <div id="nag"><p>misia matma > _ <</p></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nagP = document.querySelector('#nag p');
+        
+            nagP.addEventListener('click', function() {
+                nagP.classList.add('shake');
+                
+                // Remove the shake class after the animation completes
+                setTimeout(() => {
+                    nagP.classList.remove('shake');
+                }, 700); // Duration of the shake animation in milliseconds
+            });
+        });
+        </script>
+        
+    <div id="content">
+        <ul>
+            <li><a href="podstrony/funkcje.html"><div id="funkcje" class="sub"><p>Funkcje</p></div></a></li>
+            <!-- <li><div class="sub"></div></li> -->
+            <!-- <li><div class="sub"></div></li>
+            <li><div class="sub"></div></li>
+            <li><div class="sub"></div></li> -->
+        </ul>
+    </div>
+</body>
+</html>
