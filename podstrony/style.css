@@ -2,7 +2,7 @@ html{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     overflow-x: hidden;
     width:auto;
-    height:3000vh;
+    height:auto;
 }
 
 /* width */
@@ -70,6 +70,17 @@ h2{
     border-bottom:#D58194 1px solid;
     padding-top:60px;
     padding-bottom:60px;
+}
+
+h3{
+    display:inline-block;
+    padding:0;
+    margin:0;
+    letter-spacing: 4px;
+    background: #D58194;
+    text-shadow: 2px 2px 1px rgb(0, 0, 0);
+    border:rgba(255, 255, 255, 0.623) 2px solid;
+    border-radius: 3px;
 }
 
 b{
@@ -148,6 +159,16 @@ b{
     text-align:right;
 }
 
+#przyklad{
+    background: rgb(37, 37, 37);
+    border:1px solid rgb(37, 37, 37);
+    border-radius:10px;
+}
+
+#przyklad p{
+    text-align:center;
+}
+
 ul{
     width:50%;
     list-style:none;
@@ -180,6 +201,7 @@ a:hover{
     background-image: url(../tlo.png);
     background-size:70%;
     background-position-y: center;
+    background-position-x: center;
 }
 
 #wprowadzenie{
@@ -202,7 +224,6 @@ form {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    margin-top: 20px; 
 } 
 
 input { 
@@ -249,7 +270,7 @@ button:hover {
 }
 
 #generator{
-    margin-top:100px;
+    margin-top:50px;
     display:flex;
     flex-direction:column;
 }

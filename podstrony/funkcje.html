@@ -7,6 +7,7 @@
 <script src= 
 "https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.5.0/math.js"> 
 </script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
@@ -121,7 +122,41 @@ function topFunction() {
     <div id="content">
         <div id="tekst"><p><b>Funkcja</b> to takie matematyczne narzędzie, które na podstawie zmieniającej się zmiennej (oznaczanej przeważnie jako <b>x</b>) pozwala nam policzyć wartość (przeważnie - <b>y</b>)
          poprzez podstawienie jej do wzoru ów funkcji.<br><br>
-        Przykładowym wzorem funkcji jest <b>f(x) = x + 5</b>, co równie dobrze można zapisać jako: <b>y = x + 5</b>.</p></div>
+        Przykładowym wzorem funkcji jest <b>f(x) = x + 5</b>, co równie dobrze można zapisać jako: <b>y = x + 5</b>. Ta konkretna funkcja będzie polegać na tym, że dla dowolnej podanej liczby <b>x</b> zwrócona zostanie wartość <b>o 5 większa od liczby x</b>.</p><br>
+
+        <div id="przyklad"><h3>Przykład</h3>
+        <p>Sprawdźmy działanie tej funkcji dla jakiejkolwiek liczby. Niech będzie to liczba <b>4</b>, a więc za nasz argument (zmienną) <b>x</b> podstawiamy właśnie czwórkę:<br><br>
+        f(<b>x</b>) = <b>x</b> + 5<br>
+        f(<b>4</b>) = <b>4</b> + 5<br><br>
+        a więc <b>f(4) = 9</b></p>
+        </div><br>
+
+        <p>Zapis <b>f(x)</b> jest bardziej szczegółowy, ponieważ wskazuje nam nazwę danej funkcji (w tym przypadku: <b>f</b>) a także jej zmienne, dla których wykonywane są obliczenia. W tym przypadku jedyną zmienną jest liczba <b>x</b>,
+        choć oczywiście istnieją także funkcje które używają więcej niż jedną zmienną. Przykładowo zapis <b>g(x, k)</b> wskazywałby na to, że funkcja o nazwie <b>g</b> używa dwóch zmiennych, którymi są <b>x</b> oraz <b>k</b>.<br><br>
+        De facto, w matematyce praktycznie <b>wszystko jesteśmy w stanie zapisać pod postacią funkcji</b>, co być może pozwala lepiej zrozumieć czym ona tak naprawdę jest.</p><br>
+
+        <div id="przyklad"><h3>Przykład</h3>
+            <p>Zapiszmy podnoszenie liczby do kwadratu w postaci funkcji i sprawdźmy jej działanie na podstawie losowego argumentu, na przykład liczby <b>5</b>:<br><br>
+            kwadrat(<b>liczba</b>) = <b>liczba<sup>2</sup></b><br>
+            kwadrat(<b>5</b>) = <b>5<sup>2</sup></b><br>
+            kwadrat(<b>5</b>) = <b>25</b></p>
+        </div><br>
+
+        <p>Celowo użyty został tutaj zapis "<b>kwadrat(liczba)</b>", tak, aby nazwa funkcji wskazywała na jej działanie. Bardziej szczegółowo zapisana została również nazwa argumentu (<b>liczba</b>). Jest to zabieg jedynie stylistyczny,
+        który jednak może przydać się na maturze rozszerzonej, m.in. w zadaniu z optymalizacji. Możemy wówczas zmienić sobie nazwę funkcji oraz jej zmiennych w taki sposób, aby łatwiej było się nam w nich połapać.</p><br>
+
+        <div id="przyklad"><h3>Przykład</h3>
+            <p>f(<b>x</b>, <b>k</b>, <b>z</b>) = <sup>1</sup>&frasl;<sub>2</sub>(<b>x</b> + <b>k</b>) * <b>z</b><br><br>
+            Przy takim zapisie może być ciężko zorientować się czym konkretnie jest nasza funkcja oraz jej zmienne.<br><br>
+            poleTrapezu(<b>a</b>, <b>b</b>, <b>h</b>) = <sup>1</sup>&frasl;<sub>2</sub>(<b>a</b> + <b>b</b>) * <b>h</b><br><br>
+            O wiele czytelniej. Ponadto, tak samo jak <b>f(x)</b> często zastępuje się samym znakiem <b>y</b>, tak też i tutaj możemy zastąpić pełną nazwę funkcji i nadać jej wartości przykładowo nazwę <b>P</b>.<br><br>
+            P = <sup>1</sup>&frasl;<sub>2</sub>(<b>a</b> + <b>b</b>) * <b>h</b></p>
+        </div><br>
+        
+        <p>Każdą funkcję da się również przedstawić w postaci wykresu na układzie współrzędnych. Obrazuje on w większej skali zależność otrzymanej wartości funkcji względem argumentu dla którego ją otrzymaliśmy. 
+        Na szczęście w przypadku matury w analizie funkcji na układzie współrzędnych mierzyć musimy się jedynie z funkcjami o jednej zmiennej, tak, że <b>osią argumentów jest oś x</b>, natomiast <b>osią wartości - oś y</b>.<br><br>
+        Program rysujący wykres dla dowolnej funkcji o argumencie x:</p>
+    </div></div>
     
     </div>
 
@@ -129,9 +164,8 @@ function topFunction() {
 
         <form id="functionForm">
             <input type="text" id="functionInput" placeholder="Podaj wzór funkcji (np. x+2)">
-            <button type="submit">Rysuj</button>
+            <button type="button" onclick="plotGraph()">Rysuj</button>
         </form>
-        <h5 style="color:rgb(63, 63, 63);text-align:center;">Użyj "Math.abs()" do wartości bezwzględnych</h5>
         <div id="graph-container">
             <div id="graph"></div>
         </div>
@@ -139,25 +173,43 @@ function topFunction() {
     </div>
 
     <script> 
-        document.getElementById('functionForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+        // document.getElementById('functionForm').addEventListener('submit', function(event) {
+        //     event.preventDefault();
             
-            const input = document.getElementById('functionInput').value;
-            const parsedFunction = input.replace('y=', '');
+        //     const input = document.getElementById('functionInput').value;
+        //     const parsedFunction = input.replace('y=', '');
+        //     const xValues = [];
+        //     const yValues = [];
             
-            const xValues = [];
-            const yValues = [];
-            
-            for (let x = -10; x <= 10; x += 0.1) {
-                try {
-                    const y = eval(parsedFunction);
-                    xValues.push(x);
-                    yValues.push(y);
-                } catch (error) {
-                    alert('Invalid function. Please enter a valid mathematical function.');
-                    return;
-                }
-            }
+        //     for (let x = -10; x <= 10; x += 0.1) {
+        //         try {
+        //             const y = eval(parsedFunction);
+        //             xValues.push(x);
+        //             yValues.push(y);
+        //         } catch (error) {
+        //             alert('Invalid function. Please enter a valid mathematical function.');
+        //             return;
+        //         }
+        //     }
+
+            function plotGraph() { 
+            const graph = document.getElementById('graph'); 
+            graph.innerHTML = ''; 
+  
+            let functionInput = document.getElementById('functionInput').value; 
+ 
+            function replaceWithAbs(input) {
+    return input.replace(/\|([^\|]+)\|/g, function(match, p1) {
+        return "abs(" + p1 + ")";
+    });
+}
+
+            functionInput = replaceWithAbs(functionInput);
+            console.log(functionInput);
+            const expr = math.parse(functionInput).compile(); 
+  
+            const xValues = math.range(-10, 10, 0.1)._data; 
+            const yValues = xValues.map(x => expr.evaluate({ x })); 
 
             const trace = {
                 x: xValues,
@@ -183,14 +235,14 @@ function topFunction() {
             const data = [trace];
 
             Plotly.newPlot('graph', data, layout);
-        });
+        };
     </script> 
-    <div id="content">
+    <!-- <div id="content">
         <div id="tekst"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eleifend porta volutpat. Phasellus ullamcorper magna ligula, sed congue erat pulvinar vitae. Maecenas suscipit tortor ut massa ultrices, condimentum egestas est efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris ut erat a nisi pharetra suscipit sed id massa. Aenean rhoncus vulputate eros ac commodo. Etiam id est odio. Morbi placerat accumsan velit, eget pretium nulla. Suspendisse tempus egestas nibh eu dignissim.
 
             Quisque nec nisl non eros interdum consectetur sed vitae nibh. Sed quis gravida turpis, nec scelerisque neque. Curabitur vel nibh consectetur, sollicitudin nunc vel, mollis elit. Nulla facilisi. Ut id dui ligula. Praesent quam neque, pharetra at imperdiet vel, ornare et eros. Vivamus eleifend nibh ac egestas rhoncus. Etiam accumsan nunc arcu, sed venenatis ante commodo eget. Sed nulla lectus, rhoncus sed dignissim et, suscipit a massa. Suspendisse a imperdiet arcu, nec malesuada elit. Vestibulum pellentesque finibus tempus. Nullam pulvinar eros odio, quis porttitor orci egestas non. Ut in augue quam. Nam ornare massa eu sem dictum mattis non sed ante. In vel vestibulum est.</p></div>
         
-    </div>
+    </div> -->
     
 </body>
 </html>
